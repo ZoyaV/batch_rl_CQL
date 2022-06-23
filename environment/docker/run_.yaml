@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+ d4rl:
+  image: "d4rl:latest"
+  command: "ls"
+  build:
+      context: .
+      dockerfile: ./environment/docker/Dockerfile
+  #runtime: nvidia
+  environment:
+    - NVIDIA_VISIBLE_DEVICES=all
+    - CUDA_VISIBLE_DEVICES=0
+  volumes:
+      - .:/usr/src/app
+  
+
+#host_config:
+ # runtime: nvidia
+  #shm_size: 4g
+  #mem_limit: 32g

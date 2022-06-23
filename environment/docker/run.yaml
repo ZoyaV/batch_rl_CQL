@@ -1,0 +1,16 @@
+container:
+  image: "d4rl:latest"
+  command: 'python3 test_gpu.py'
+  runtime: nvidia
+  environment:
+    runtime: nvidia
+     - NVIDIA_VISIBLE_DEVICES=all
+     - CUDA_VISIBLE_DEVICES=1
+  #  command: bash
+code:
+  folder: "../../"
+
+#host_config:
+#  runtime: nvidia
+ # shm_size: 4g
+  #mem_limit: 32g
