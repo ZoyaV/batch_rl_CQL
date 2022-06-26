@@ -29,6 +29,12 @@ For run example with mujoco run: ```sh run_d4rl_exp.sh```
 
 # Experiment visualization
 
+First, specify variable LD_PRELOAD:
+
+```
+export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libGLEW.so
+```
+
 For visualize police you need run: ```visualize.sh```
 
 or 
