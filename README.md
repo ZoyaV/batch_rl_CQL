@@ -1,7 +1,9 @@
 # batch_rl_CQL
 
 Rlkit version with CQL usable with python >=3.8
+
 Rlkit sorce: https://github.com/vitchyr/rlkit
+
 CQL sorce: https://github.com/aviralkumar2907/CQL
 
 # Installation 
