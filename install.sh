@@ -1,4 +1,5 @@
 pip install --upgrade pip setuptools wheel
+pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu113
 pip install gtimer==1.0.0b5
 pip install dm-control
 
