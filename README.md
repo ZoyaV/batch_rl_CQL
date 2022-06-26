@@ -15,7 +15,7 @@ Run
 
 For mujoco experiments you need to define variables LD_LIBRARY_PATH and WANDB_API_KEY
 
-Example
+Example:
 ```
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:path/to/.mujoco/mujoco210/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/nvidia'
