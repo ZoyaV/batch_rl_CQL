@@ -8,7 +8,7 @@ import wandb
 import numpy as np
 
 import rlkit.pythonplusplus as ppp
-wandb.init(name = 'babycar27',project='CQL_d4rl')
+wandb.init(project='CQL_d4rl')
 
 def get_generic_path_information(paths, stat_prefix=''):
     """
