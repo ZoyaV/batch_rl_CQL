@@ -21,3 +21,17 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:path/to/.mujoco/mujoco210/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/nvidia'
 export WANDB_API_KEY=''
 ```
+
+# Train
+
+Example code of experiments you can fine in path: exaples/
+For run example with mujoco run: ```sh run_d4rl_exp.sh```
+
+# Experiment visualization
+
+For visualize police you need run: ```visualize.sh```
+
+or 
+```
+ python3 scripts/run_policy.py path/to/checkpoints/params.pkl
+```
