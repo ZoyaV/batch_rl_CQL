@@ -17,8 +17,8 @@ def drop_global_information(observations):
 
 
 def example():
-    num_agents = 8
-    gc = GridConfig(seed=None, num_agents=num_agents, max_episode_steps=64, obs_radius=5, size=128, density=0.3)
+    num_agents = 2
+    gc = GridConfig(seed=None, num_agents=num_agents, max_episode_steps=64, obs_radius=5, size=32, density=0.3)
 
     # turn off with_animation to speedup generation speed
     env = gym.make('POMAPF-v0', grid_config=gc, with_animations=True, auto_reset=False, egocentric_idx=None,
@@ -33,7 +33,7 @@ def example():
     # partially observable decentralized planning approach
     # algo = RePlan(RePlanConfig())
 
-    for _ in range(100):
+    for _ in range(100000):
         observations = env.reset()
         algo.after_reset()
         dones = [False, ...]
