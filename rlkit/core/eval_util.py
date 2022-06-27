@@ -8,7 +8,7 @@ import wandb
 import numpy as np
 
 import rlkit.pythonplusplus as ppp
-wandb.init(project='CQL_d4rl')
+wandb.init(project='CQL_pogema')
 
 def get_generic_path_information(paths, stat_prefix=''):
     """
