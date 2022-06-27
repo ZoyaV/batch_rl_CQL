@@ -1,0 +1,33 @@
+name: pomapf-eval-similarity-noise-v2
+use_wandb: True
+environment:
+  name: POMAPF-v0
+  grid_config:
+    max_episode_steps: 512
+    map_name:
+      grid_search: [ 'sc1-TheFrozenSea', 'sc1-TheHighway',
+                     'street-Shanghai_0',  'street-Sydney_1',
+                     'wc3-ScorchedBasin',  'wc3-TranquilPaths',
+                     'mazes-s40_wc4_od30',  'mazes-s43_wc2_od45',
+                     'random-s43_d0.3', 'random-s44_d0.35', ]
+
+    num_agents:
+      grid_search: [ 50, 100, 150, 200, 250, 300]
+#      grid_search: [ 250, 300]
+    seed:
+      grid_search: [ 0, 1, 2, 3, 4, 5, 7, 8, 9]
+algo:
+  grid_search:
+#    - { name: HSwitcher, learning: { name: APPO, path_to_weights: "results/ma" }, num_process: 3 }
+    - { name: EPOM+noise, path_to_weights: "results/ma", num_process: 6, noise_tau: 8, noise_variance: 0.27 }
+    - { name: EPOM+noise2, path_to_weights: "results/ma", num_process: 6, noise_tau: 8, noise_variance: 0.35 }
+    - { name: EPOM, path_to_weights: "results/ma", num_process: 6, noise_tau: 0, noise_variance: 0.0 }
+#    - { name: ASwitcher, learning: { name: APPO, path_to_weights: "results/ma" }, num_process: 3 }
+#    - { name: A*, max_planning_steps: 10000, num_process: 5 }
+results_views:
+  - { type: tabular, drop_keys: [ seed, flowtime, makespan, num_agents ], table_format: latex_booktabs }
+  - { type: tabular, drop_keys: [ seed, flowtime, makespan, map_name ], print: True }
+  - { type: plot, x: num_agents, y: ISR }
+  - { type: plot, x: num_agents, y: CSR }
+  - { type: plot, x: num_agents, y: similarity_distance }
+  - { type: plot, x: num_agents, y: num_interventions }

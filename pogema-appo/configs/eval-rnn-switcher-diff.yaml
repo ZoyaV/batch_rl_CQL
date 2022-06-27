@@ -1,0 +1,25 @@
+name: pomapf-eval-debug
+use_wandb: True
+environment:
+  name: POMAPF-v0
+  grid_config:
+    max_episode_steps: 512
+    map_name:
+      grid_search: [ 'sc1-TheFrozenSea', 'sc1-TheHighway',
+                     'street-Shanghai_0',  'street-Sydney_1',
+                     'wc3-ScorchedBasin',  'wc3-TranquilPaths',
+                     'mazes-s40_wc4_od30',  'mazes-s43_wc2_od45',
+                     'random-s43_d0.3', 'random-s44_d0.35', ]
+
+    num_agents:
+      grid_search: [ 50, 150, 250]
+    seed:
+      grid_search: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, ]
+algo:
+  name:
+    grid_search: [ASwitcher, HSwitcher, RSwitcher]
+  num_process: 4
+  learning: { name: APPO, path_to_weights: "results/ma" }
+results_views:
+  - { type: tabular, drop_keys: [ seed, flowtime, makespan, num_agents ], table_format: latex_booktabs }
+  - { type: tabular, drop_keys: [ seed, flowtime, makespan, map_name ], print: True }

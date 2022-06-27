@@ -1,0 +1,30 @@
+name: pomapf-eval-debug
+use_wandb: False
+environment:
+  name: POMAPF-v0
+  grid_config:
+    max_episode_steps: 128
+    map_name:
+      grid_search: [ 'sc1-TaleofTwoCities',
+                     'street-Shanghai_0',
+                     'wc3-TranquilPaths', ]
+
+    num_agents:
+      grid_search: [ 2 ]
+    seed:
+      grid_search: [ 0 ]
+algo:
+  grid_search:
+    - { name: LSwitcher, num_process: 3 }
+    - { name: HSwitcher, num_process: 3 }
+    - { name: RSwitcher, num_process: 3 }
+    - { name: EPOM, num_process: 3 }
+    - { name: ASwitcher, num_process: 3 }
+    - { name: RePlan, num_process: 3 }
+results_views:
+  - { type: tabular, drop_keys: [ seed, flowtime, makespan, num_agents ], table_format: latex_booktabs }
+  - { type: tabular, drop_keys: [ seed, flowtime, makespan, map_name ], print_results: True }
+  - { type: plot, x: num_agents, y: CSR }
+  - { type: plot, x: num_agents, y: ISR }
+  - { type: plot, x: num_agents, y: makespan }
+  - { type: plot, x: num_agents, y: rl_used }

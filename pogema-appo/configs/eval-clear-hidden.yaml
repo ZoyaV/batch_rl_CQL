@@ -1,0 +1,32 @@
+name: pomapf-eval-clear-hidden
+use_wandb: True
+environment:
+  name: POMAPF-v0
+  grid_config:
+    max_episode_steps: 512
+    map_name:
+      grid_search: [ 'sc1-TheFrozenSea', 'sc1-TheHighway',
+                     'street-Shanghai_0',  'street-Sydney_1',
+                     'wc3-ScorchedBasin',  'wc3-TranquilPaths',
+                     'mazes-s40_wc4_od30',  'mazes-s43_wc2_od45',
+                     'random-s43_d0.3', 'random-s44_d0.35', ]
+
+    num_agents:
+      grid_search: [ 300, 250, 200, 150, 100, 50]
+    seed:
+      grid_search: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,]
+
+algo:
+  name: ASwitcher
+  num_process: 10
+  learning: { name: APPO, path_to_weights: "results/ma" }
+  clear_hidden_after_switch:
+    grid_search: [True, False]
+
+results_views:
+  - { type: tabular, drop_keys: [ seed, flowtime, makespan, num_agents ], table_format: latex_booktabs }
+  - { type: tabular, drop_keys: [ seed, flowtime, makespan, map_name ], print: True }
+  - { type: plot, x: num_agents, y: CSR }
+  - { type: plot, x: num_agents, y: ISR }
+  - { type: plot, x: num_agents, y: makespan }
+  - { type: plot, x: num_agents, y: rl_used }
