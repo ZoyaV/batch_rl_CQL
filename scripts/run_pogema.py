@@ -57,7 +57,7 @@ class ObsActionWrapper(gym.Wrapper):
 def simulate_policy(args):
     data = torch.load(args.file)
     policy = data['evaluation/policy']
-    gc = GridConfig(seed=None, num_agents=1, max_episode_steps=64, obs_radius=5, size=16, density=0.3)
+    gc = GridConfig(seed=None, num_agents=1, max_episode_steps=64, obs_radius=5, size=32, density=0.3)
     env = ObsActionWrapper(
         gym.make('POMAPF-v0', grid_config=gc, with_animations=True, auto_reset=False, egocentric_idx=None,
                  observation_type='MAPF'))
