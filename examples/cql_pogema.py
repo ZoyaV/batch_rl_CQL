@@ -65,17 +65,20 @@ class ObsActionWrapper(gym.Wrapper):
 
 
 def load_buffer(dataset, replay_buffer):
-    replay_buffer._observations = dataset['observations']
+  #  b = dataset['observations'].shape[0]//6
+    replay_buffer._observations = dataset['observations'][:,:]
     print("obs shape", dataset['observations'].shape)
-    replay_buffer._next_obs = dataset['next_observations']
-    replay_buffer._actions = dataset['actions']
+    print("memory use", replay_buffer._observations.nbytes)
+    replay_buffer._next_obs = dataset['next_observations'][:,:]
+    replay_buffer._actions = dataset['actions'][:]
+    print(type(replay_buffer._next_obs))
     print("act shape", dataset['actions'].shape)
-    replay_buffer._rewards = np.expand_dims(np.squeeze(dataset['rewards']), 1)
+    replay_buffer._rewards = np.expand_dims(np.squeeze(dataset['rewards'][:]), 1)
     print(" reward shape", dataset['rewards'].shape)
-    replay_buffer._terminals = np.expand_dims(np.squeeze(dataset['terminals']), 1)
+    replay_buffer._terminals = np.expand_dims(np.squeeze(dataset['terminals'][:]), 1)
     print("done shape", dataset['terminals'].shape)
     replay_buffer._size = dataset['terminals'].shape[0]
-    print('Number of terminals on: ', replay_buffer._terminals.sum().shape)
+    print ('Number of terminals on: ', replay_buffer._terminals.sum().shape)
     replay_buffer._top = replay_buffer._size
 
 
@@ -135,10 +138,10 @@ def experiment(variant):
         variant['replay_buffer_size'],
         expl_env,
     )
-    import pickle
-    with open('examples/data.pickle', 'rb') as f:
-        data = pickle.load(f)
-    # data = h5py.File('examples/data.hdf5', 'r')
+  #  import pickle
+   # with open('examples/data.pickle', 'rb') as f:
+     #  data = pickle.load(f)
+    data = h5py.File('examples/data_v20.hdf5', 'r')
     load_buffer(data, replay_buffer)
 
     trainer = CQLTrainer(
